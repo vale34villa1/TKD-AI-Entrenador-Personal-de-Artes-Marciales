@@ -1,0 +1,16 @@
+{
+  "white": {
+    "name": "백띠 | Blanca",
+    "tech": "Ap Chagi",
+    "target": 160,
+    "history": "El Taekwondo moderno se sistematizó en 1955. La cinta blanca simboliza la inocencia del principiante.",
+    "motivation": "El primer paso es el más valioso del camino."
+  },
+  "yellow": {
+    "name": "노란띠 | Amarilla",
+    "tech": "Dollyo Chagi",
+    "target": 150,
+    "history": "La cinta amarilla representa la tierra donde la semilla del Taekwondo echa raíces.",
+    "motivation": "La disciplina es el puente entre las metas y los logros."
+  }
+}
