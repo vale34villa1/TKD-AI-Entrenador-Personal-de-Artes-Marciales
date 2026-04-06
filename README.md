@@ -2,7 +2,7 @@
 Sistema basado en MediPipe y Python para el seguimiento y corrección de técnicas como complemento en la disciplina de Taekwondo.
 
 ### Estructura del Proyecto
-'''
+```bash
 ├── data/
 │   ├── history.json       # Base de datos de historia y filosofía
 │   ├── motivation.json    # Frases motivacionales diarias
@@ -13,7 +13,7 @@ Sistema basado en MediPipe y Python para el seguimiento y corrección de técnic
 │   └── utils.py           # Funciones matemáticas para ángulos y biomecánica
 ├── main.py                # Punto de entrada de la aplicación
 └── README.md
-'''
+
 
 ### 🥋 Lógica de Entrenamiento (Niveles)
 El sistema evalúa el desempeño basándose en la precisión geométrica de las técnicas:
