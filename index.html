@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TKD-AI | Neo-Seoul Training</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils"></script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <span class="logo-text">태권도 AI</span>
+            <span class="ai-badge">CORE TECH</span>
+        </a>
+        <div class="belt-status" id="belt-display">백띠 | Cinta Blanca</div>
+    </nav>
+
+    <main class="app-container">
+        <aside class="sidebar">
+            <div class="card motivation-card">
+                <h3>동기 부여 | Motivación</h3>
+                <p id="motivation-text">"La persistencia es el camino del éxito."</p>
+            </div>
+            
+            <div class="card history-card">
+                <h3>역사 | Tradición</h3>
+                <p id="history-box">El Taekwondo es un arte de autodefensa que floreció en Corea durante más de 2000 años.</p>
+            </div>
+        </aside>
+
+        <section class="viewport">
+            <div class="canvas-wrapper">
+                <video id="input_video" hidden></video>
+                <canvas id="output_canvas" width="800" height="600"></canvas>
+                <div id="feedback-overlay">준비 | ESPERANDO...</div>
+            </div>
+        </section>
+
+        <aside class="sidebar">
+            <div class="card stats-card">
+                <h3>기하학 | Biomecánica</h3>
+                <div class="angle-display">
+                    <span id="angle-value">0°</span>
+                    <label>각도 | ÁNGULO</label>
+                </div>
+            </div>
+
+            <div class="card current-tech">
+                <h3>목표 기술 | Técnica</h3>
+                <p id="technique-name" style="color: var(--k-white); font-weight: 700;">Ap Chagi (Patada Frontal)</p>
+                <small style="color: var(--k-blue);">Nivel: Principiante</small>
+            </div>
+        </aside>
+    </main>
+
+    <script type="module">
+        const videoElement = document.getElementById('input_video');
+        const canvasElement = document.getElementById('output_canvas');
+        const canvasCtx = canvasElement.getContext('2d');
+        const feedbackOverlay = document.getElementById('feedback-overlay');
+        const angleValue = document.getElementById('angle-value');
+
+        // Cálculo biomecánico preciso
+        function calculateAngle(a, b, c) {
+            const radians = Math.atan2(c.y - b.y, c.x - b.x) - Math.atan2(a.y - b.y, a.x - b.x);
+            let angle = Math.abs(radians * 180.0 / Math.PI);
+            if (angle > 180.0) angle = 360 - angle;
+            return angle;
+        }
+
+        function onResults(results) {
+            canvasCtx.save();
+            canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+            
+            // Dibujamos el video original
+            canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+
+            if (results.poseLandmarks) {
+                // Dibujar esqueleto con colores de la marca (K-Blue y K-Red)
+                drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS, {color: '#007aff', lineWidth: 2});
+                drawLandmarks(canvasCtx, results.poseLandmarks, {color: '#ff3e3e', lineWidth: 1, radius: 2});
+
+                // Analizar puntos críticos (Pierna Derecha: Cadera 24, Rodilla 26, Tobillo 28)
+                const hip = results.poseLandmarks[24];
+                const knee = results.poseLandmarks[26];
+                const ankle = results.poseLandmarks[28];
+
+                const angle = calculateAngle(hip, knee, ankle);
+                angleValue.innerText = `${Math.round(angle)}°`;
+
+                // Feedback visual dinámico
+                if (angle > 160) {
+                    feedbackOverlay.innerText = "완벽해 | ¡PERFECTO!";
+                    feedbackOverlay.style.background = "var(--k-gold)";
+                    angleValue.classList.add('status-perfect');
+                } else if (angle < 90) {
+                    feedbackOverlay.innerText = "장전 | CARGANDO...";
+                    feedbackOverlay.style.background = "var(--k-blue)";
+                    angleValue.classList.remove('status-perfect');
+                } else {
+                    feedbackOverlay.innerText = "더 뻗어 | EXTIENDE MÁS";
+                    feedbackOverlay.style.background = "var(--k-red)";
+                    angleValue.classList.remove('status-perfect');
+                }
+            }
+            canvasCtx.restore();
+        }
+
+        const pose = new Pose({
+            locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`
+        });
+
+        pose.setOptions({
+            modelComplexity: 1,
+            smoothLandmarks: true,
+            minDetectionConfidence: 0.5,
+            minTrackingConfidence: 0.5
+        });
+
+        pose.onResults(onResults);
+
+        const camera = new Camera(videoElement, {
+            onFrame: async () => {
+                await pose.send({image: videoElement});
+            },
+            width: 800,
+            height: 600
+        });
+        camera.start();
+    </script>
+</body>
+</html>
