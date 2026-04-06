@@ -40,7 +40,7 @@ Donde:
 * $\vec{BA} \cdot \vec{BC}$ es el producto punto de los vectores.
 * $|\vec{BA}| |\vec{BC}|$ es el producto de sus magnitudes (normas).
 
-'''
+
 # Ejemplo rápido de uso del motor de detección
 ```bash
 from src.engine import TKDTrainer
