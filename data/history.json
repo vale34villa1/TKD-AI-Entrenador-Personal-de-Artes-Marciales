@@ -1,0 +1,12 @@
+{
+  "levels": {
+    "white": {
+      "title": "El Origen de la Cortesía",
+      "content": "El Taekwondo no es solo patear; nace de la filosofía Hwarang de la antigua Corea. La cinta blanca representa el lienzo vacío donde escribirás tu camino."
+    },
+    "yellow": {
+      "title": "La Semilla en la Tierra",
+      "content": "A medida que avanzas a cinta amarilla, tu base debe ser sólida. En la historia coreana, la disciplina superaba a la fuerza bruta."
+    }
+  }
+}
