@@ -1,18 +1,19 @@
 # TKD-AI-Entrenador-Personal-de-Artes-Marciales
-Sistema basado en MediPipe y Python para el seguimiento y corrección de técnicas como complemento en la disciplina de Taekwondo.
+Sistema basado en html, js, json y Python para el seguimiento y corrección de técnicas como complemento en la disciplina de Taekwondo.
 
 ### Estructura del Proyecto
 ```bash
+├── index.html          # Interfaz principal (UI/UX)
+├── css/
+│   └── style.css       # Diseño Neo-Seoul y Branding
+├── js/
+│   ├── main.js         # Lógica de la cámara y MediPipe
+│   └── instructor.js   # Lógica de validación y niveles
 ├── data/
-│   ├── history.json       # Base de datos de historia y filosofía
-│   ├── motivation.json    # Frases motivacionales diarias
-│   └── levels/            # Parámetros técnicos por cinta (Blanca -> Negra)
-├── src/
-│   ├── engine.py          # Núcleo de procesamiento de visión artificial
-│   ├── theory_module.py   # Sistema de trivias e historia
-│   └── utils.py           # Funciones matemáticas para ángulos y biomecánica
-├── main.py                # Punto de entrada de la aplicación
-└── README.md
+│   ├── levels.json     # Configuración técnica de cinturones
+│   ├── history.json    # Base de datos histórica
+│   └── motivation.json # Frases motivacionales
+└── assets/             # (Opcional) Sonidos de éxito o logos
 ```
 
 ### 🥋 Lógica de Entrenamiento (Niveles)
