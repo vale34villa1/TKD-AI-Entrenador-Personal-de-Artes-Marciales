@@ -1,8 +1,9 @@
 # TKD-AI-Entrenador-Personal-de-Artes-Marciales
 Sistema basado en MediPipe y Python para el seguimiento y corrección de técnicas como complemento en la disciplina de Taekwondo.
 
-### Estructura del ProyectoPlaintext├── data/
+### Estructura del Proyecto
 '''
+├── data/
 │   ├── history.json       # Base de datos de historia y filosofía
 │   ├── motivation.json    # Frases motivacionales diarias
 │   └── levels/            # Parámetros técnicos por cinta (Blanca -> Negra)
@@ -13,7 +14,8 @@ Sistema basado en MediPipe y Python para el seguimiento y corrección de técnic
 ├── main.py                # Punto de entrada de la aplicación
 └── README.md
 '''
-🥋 Lógica de Entrenamiento (Niveles)
+
+### 🥋 Lógica de Entrenamiento (Niveles)
 El sistema evalúa el desempeño basándose en la precisión geométrica de las técnicas:
 ⚪ Cinta Blanca (Principiante)
 - Técnica Foco: Ap Chagi (Patada Frontal).
@@ -40,8 +42,9 @@ trainer.start_session()
 '''
 🌟 Motivación Diaria, Contribuciones (¡Las contribuciones son bienvenidas! Si tienes ideas para mejorar los algoritmos de detección de patadas con giro o quieres añadir más contenido histórico, por favor abre un Pull Request.)
 
-📄 LicenciaEste proyecto está bajo la Licencia MIT.
+📄 Licencia
 ---
+Este proyecto está bajo la Licencia MIT.
 
 ### ¿Cómo usar este README?
 1. Crea un repositorio en **GitHub**.
