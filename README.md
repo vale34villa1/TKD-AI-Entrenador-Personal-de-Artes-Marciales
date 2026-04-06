@@ -30,17 +30,27 @@ El sistema evalúa el desempeño basándose en la precisión geométrica de las 
 ⚫ Cinta Negra (Avanzado)
 - Técnica Foco: Poomsae y patadas con giro (Mondollyo).
 - Requisito: Estabilidad del centro de gravedad y velocidad de ejecución.💻
-- Ejemplo de Ejecución: El núcleo del sistema utiliza el cálculo de ángulos para validar la ejecución:
 
-$$ \theta = \arccos\left(\frac{\vec{BA} \cdot \vec{BC}}{|\vec{BA}| |\vec{BC}|}\right) $$Python
+
+Ejemplo de Ejecución: El núcleo del sistema utiliza el cálculo de ángulos para validar la ejecución:
+
+$$\theta = \arccos\left(\frac{\vec{BA} \cdot \vec{BC}}{|\vec{BA}| |\vec{BC}|}\right)$$
+
+Donde:
+* $\vec{BA} \cdot \vec{BC}$ es el producto punto de los vectores.
+* $|\vec{BA}| |\vec{BC}|$ es el producto de sus magnitudes (normas).
 
 '''
 # Ejemplo rápido de uso del motor de detección
+```bash
 from src.engine import TKDTrainer
 trainer = TKDTrainer(belt_level='White')
 trainer.start_session()
-'''
-🌟 Motivación Diaria, Contribuciones (¡Las contribuciones son bienvenidas! Si tienes ideas para mejorar los algoritmos de detección de patadas con giro o quieres añadir más contenido histórico, por favor abre un Pull Request.)
+```
+
+🌟 Motivación Diaria, Contribuciones (¡Las contribuciones son bienvenidas!
+
+Si tienes ideas para mejorar los algoritmos de detección de patadas con giro o quieres añadir más contenido histórico, por favor abre un Pull Request.)
 
 📄 Licencia
 ---
